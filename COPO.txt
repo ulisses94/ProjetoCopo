@@ -1,0 +1,316 @@
+using System;
+
+namespace Copo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string material;
+            int volume, liq = 0;
+
+            Console.WriteLine("------------------BEM VINDO------------------");
+            Console.WriteLine(" Digite o volume e tipo de material do copo:");
+            volume = int.Parse(Console.ReadLine());
+            material = Console.ReadLine();
+            Console.WriteLine("************************************************************");
+            Console.WriteLine("");
+            Console.WriteLine("O copo é de " + material + " com volume de " + volume + "mL.");
+            Console.WriteLine("");
+            Console.WriteLine("************************************************************");
+            Console.WriteLine("");
+            Console.WriteLine("Pressione a tecla 'ENTER' para prosseguir ao menu.");
+            Console.ReadLine();
+            Console.Clear();
+
+            Menu();
+
+            void Menu()
+            {
+                Console.WriteLine("*********************************************");
+                Console.WriteLine("*-------------------MENU--------------------*");
+                Console.WriteLine("*********************************************");
+                Console.WriteLine("");
+                Console.WriteLine("ESCOLHA UMA DAS OPÇÕES ABAIXO:");
+                Console.WriteLine("1 - Verificar se o copo está vazio.");
+                Console.WriteLine("2 - Verificar se o copo está cheio.");
+                Console.WriteLine("3 - Adicionar líquido no copo.");
+                Console.WriteLine("4 - Remover líquido do copo.");
+                Console.WriteLine("5 - Verificar a quantidade de líquido atual do copo.");
+                Console.WriteLine("6 - Verificar informações do copo.");
+                Console.WriteLine("7 - Retornar ao Menu.");
+                Console.WriteLine("8 - Encerrar o sistema.");
+
+                int escolha = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                switch (escolha)
+                {
+                    case 1:
+                        estaVazio();
+                        break;
+                    case 2:
+                        estaCheio();
+                        break;
+                    case 3:
+                        adicionaLiq();
+                        break;
+                    case 4:
+                        removeLiq();
+                        break;
+                    case 5:
+                        verificaVolume();
+                        break;
+                    case 6:
+                        informacoesCopo();
+                        break;
+                    case 7:
+                        Menu();
+                        break;
+                    case 8:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            void removeLiq()
+            {
+                if (liq > 0)
+                {
+                    Console.WriteLine("Digite um valor em mL para ser removido do copo:");
+                    int tiraliq = int.Parse(Console.ReadLine());
+                    liq -= tiraliq;
+                    Console.WriteLine("Volume atual do copo: " + liq + "mL.");
+                    Console.WriteLine("Escolha uma das opções abaixo:");
+                    Console.WriteLine("1 - Remover mais líquido.");
+                    Console.WriteLine("2 - Adicionar mais líquido.");
+                    Console.WriteLine("3 - Retornar ao menu.");
+                    Console.WriteLine("4 - Encerrar o sistema.");
+                    int resposta3 = int.Parse(Console.ReadLine());
+
+                    switch (resposta3)
+                    {
+                        case 1:
+                            removeLiq();
+                            break;
+                        case 2:
+                            adicionaLiq();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Menu();
+                            break;
+                        case 4:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (liq <= 0)
+                {
+                    Console.WriteLine("Não é possível retirar mais líquido.");
+                    Console.WriteLine("Escolha uma das opções abaixo");
+                    Console.WriteLine("1 - Adicionar mais líquido.");
+                    Console.WriteLine("2 - Retornar ao menu.");
+                    Console.WriteLine("3 - Encerrar o sistema.");
+                    int resposta4 = int.Parse(Console.ReadLine());
+
+                    switch (resposta4)
+                    {
+                        case 1:
+                            adicionaLiq();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Menu();
+                            break;
+                        case 3:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            void adicionaLiq()
+            {
+                if (liq < volume)
+                {
+                    Console.WriteLine("Digite um valor em mL para ser adicionado ao copo:");
+                    int addliq = int.Parse(Console.ReadLine());
+                    liq += addliq;
+                    Console.WriteLine("Volume atual do copo: " + liq + "mL.");
+                    Console.WriteLine("Escolha uma das opções abaixo:");
+                    Console.WriteLine("1 - Remover mais líquido.");
+                    Console.WriteLine("2 - Adicionar mais líquido.");
+                    Console.WriteLine("3 - Retornar ao menu.");
+                    Console.WriteLine("4 - Encerrar o sistema.");
+                    int resposta6 = int.Parse(Console.ReadLine());
+
+                    switch (resposta6)
+                    {
+                        case 1:
+                            removeLiq();
+                            break;
+                        case 2:
+                            adicionaLiq();
+                            break;
+                        case 3:
+                            Console.Clear();
+                            Menu();
+                            break;
+                        case 4:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                }
+
+                if (liq >= volume)
+                {
+                    Console.WriteLine("Copo totalmente cheio, impossível adicionar mais líquido.");
+                    Console.WriteLine("Escolha uma das opções abaixo");
+                    Console.WriteLine("1 - Remover líquido.");
+                    Console.WriteLine("2 - Retornar ao menu.");
+                    Console.WriteLine("3 - Encerrar o sistema.");
+                    int resposta7 = int.Parse(Console.ReadLine());
+
+                    switch (resposta7)
+                    {
+                        case 1:
+                            removeLiq();
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Menu();
+                            break;
+                        case 3:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            void verificaVolume()
+            {
+                Console.WriteLine("A quantidade de líquido atual do copo é de " + liq + "mL.");
+                Console.WriteLine("ESCOLHA UMA DAS OPÇÕES ABAIXO:");
+                Console.WriteLine("1 - Retornar ao Menu.");
+                Console.WriteLine("2 - Adicionar líquido no copo.");
+                Console.WriteLine("3 - Remover líquido do copo.");
+                Console.WriteLine("2 - Encerrar o sistema.");
+                int resposta10 = int.Parse(Console.ReadLine());
+
+                switch (resposta10)
+                {
+                    case 1:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    case 2:
+                        adicionaLiq();
+                        break;
+                    case 3:
+                        removeLiq();
+                        break;
+                    case 4:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            void estaVazio()
+            {
+                if (liq == 0)
+                {
+                    Console.WriteLine("Sim, o copo está vazio.");
+                }
+                else
+                {
+                    Console.WriteLine("Não, o copo não está vazio.");
+                }
+                Console.WriteLine("ESCOLHA UMA DAS OPÇÕES ABAIXO:");
+                Console.WriteLine("1 - Retornar ao Menu.");
+                Console.WriteLine("2 - Encerrar o sistema.");
+                int resposta9 = int.Parse(Console.ReadLine());
+
+                switch (resposta9)
+                {
+                    case 1:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            void estaCheio()
+            {
+                if (liq == 200)
+                {
+                    Console.WriteLine("Sim, o copo está vazio.");
+                }
+                else
+                {
+                    Console.WriteLine("Não, o copo não está cheio.");
+                }
+                Console.WriteLine("ESCOLHA UMA DAS OPÇÕES ABAIXO:");
+                Console.WriteLine("1 - Retornar ao Menu.");
+                Console.WriteLine("2 - Encerrar o sistema.");
+                int resposta15 = int.Parse(Console.ReadLine());
+
+                switch (resposta15)
+                {
+                    case 1:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            void informacoesCopo()
+            {
+                Console.WriteLine("O copo é de " + material + " com volume de " + volume + "mL.");
+                Console.WriteLine("");
+                Console.WriteLine("ESCOLHA UMA DAS OPÇÕES ABAIXO:");
+                Console.WriteLine("1 - Retornar ao Menu.");
+                Console.WriteLine("2 - Encerrar o sistema.");
+                int resposta16 = int.Parse(Console.ReadLine());
+
+                switch (resposta16)
+                {
+                    case 1:
+                        Console.Clear();
+                        Menu();
+                        break;
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+    }
+}
